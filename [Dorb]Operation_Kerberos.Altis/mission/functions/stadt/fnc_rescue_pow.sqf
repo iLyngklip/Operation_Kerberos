@@ -39,6 +39,7 @@ _rand = floor(random 4) + 3;
 for "_i" from 1 to _rand do{
 	_gruppe = createGroup civilian;
 	SETPVAR(_gruppe,GVAR(istarget),true);
+	_gruppe allowFleeing 0;
 	_einheit = dorb_pow SELRND;
 	_spawngebaeude = _gebaeudepos_arr SELRND;
 	_spawnposition = _spawngebaeude SELRND;
@@ -46,6 +47,28 @@ for "_i" from 1 to _rand do{
 	SETPVAR(_unit,GVAR(istarget),true);
 	_pow pushBack _unit;
 };
+
+//////////////////////////////////////////////////
+////// Geiseln bearbeiten					 /////
+//////////////////////////////////////////////////
+
+{
+	removeAllAssignedItems _x;
+	removeallweapons _x;
+	removeHeadgear _x;
+	removeBackpack _x;
+	_x disableAI "MOVE";
+	_x disableAI "FSM";
+	[_x,true] call ace_captives_fnc_setHandcuffed;
+
+	if (dorb_debug) then {
+		_mrkr = createMarker [format ["%1-POW:%2",_task,_x],(getPos _x)];
+		_mrkr setMarkerShape "ICON";
+		_mrkr setMarkerColor "ColorBlack";
+		_mrkr setMarkerType "hd_destroy";
+	};
+	[_x,QGVAR(rescuepoint),(QUOTE(INC(GVAR(rescue_counter));)+"moveOut (_this select 0);uisleep 0.3;deleteVehicle (_this select 0);")] call BIS_fnc_addScriptedEventHandler;
+} forEach _pow;
 
 //////////////////////////////////////////////////
 ////// Gegner erstellen 					 /////
@@ -59,32 +82,6 @@ for "_i" from 1 to _rand do{
 
 [_task,true,[[LSTRING(RESC_TASK_DESC),count _pow,_ort],LSTRING(RESC_TASK),LSTRING(RESCUE)],_position,"AUTOASSIGNED",0,false,true,"",true] spawn BIS_fnc_setTask;
 [LSTRING(RESCUE),[LSTRING(RESC_TASK)],"data\icon\icon_rescue.paa",true] spawn EFUNC(interface,disp_info_global);
-
-//////////////////////////////////////////////////
-////// Geiseln bearbeiten					 /////
-//////////////////////////////////////////////////
-
-{
-	_x setCaptive true;
-	removeAllAssignedItems _x;
-	removeallweapons _x;
-	removeHeadgear _x;
-	removeBackpack _x;
-	_x setunitpos "UP";
-	_x setBehaviour "Careless";
-	dostop _x;
-	_x playmove "amovpercmstpsnonwnondnon_amovpercmstpssurwnondnon";
-	_x disableAI "MOVE";
-
-	if (dorb_debug) then {
-		_mrkr = createMarker [format ["%1-POW:%2",_task,_x],(getPos _x)];
-		_mrkr setMarkerShape "ICON";
-		_mrkr setMarkerColor "ColorBlack";
-		_mrkr setMarkerType "hd_destroy";
-	};
-	[_x,QGVAR(rescuepoint),(QUOTE(INC(GVAR(rescue_counter));)+"moveOut (_this select 0);uisleep 0.3;deleteVehicle (_this select 0);")] call BIS_fnc_addScriptedEventHandler;
-}forEach _pow;
-
 
 
 //////////////////////////////////////////////////
