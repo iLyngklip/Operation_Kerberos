@@ -13,6 +13,7 @@ TRIPLES(PREFIX,makro,iscasvehicle) = {
 };
 
 PREP(debug_performance);
+PREP(PBOcheck);
 PREP(userconfig);
 PREPS(debug,maplog);
 PREPS(debug,putinlog);
