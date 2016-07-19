@@ -9,6 +9,8 @@ PREP(disp_message);
 PREP(disp_message_global);
 PREP(disp_progressbar);
 PREP(disp_timer);
+PREP(countdown_show);
+PREP(countdown_set);
 PREP(message_global);
 PREP(message);
 

@@ -13,3 +13,22 @@ QEGVAR(mission,endzeit) addPublicVariableEventHandler {[] spawn FUNC(disp_timer)
 [] call FUNC(teleport_init);
 [] call FUNC(spawn_init);
 [] call FUNC(crate_init);
+
+
+
+
+//// create Settings
+QGVAR(countdown) addPublicVariableEventHandler {[] spawn FUNC(countdown_show)};
+[
+    "Dorb_Timer",
+    "CHECKBOX",
+    localize ELSTRING(SETTINGS,TIMER),
+    briefingName,
+    true,
+    nil,
+    {  
+		_this params ["_value"];
+		GVAR(countdown_show) = _value;
+        If (_value) then {[] spawn FUNC(countdown_show);};
+    }
+] call CBA_Settings_fnc_init;

@@ -77,6 +77,31 @@ class  RscTitles {
 	class GVAR(message_8) : GVAR(message_1) {idd = 770180;};
 	class GVAR(message_9) : GVAR(message_1) {idd = 770190;};
 	
+	
+	class GVAR(countdown) {
+        duration = 61;
+        idd = 770200;
+        movingenable = 0;
+        onLoad = QUOTE(uiNamespace setVariable [ARR_2('GVAR(countdown)', _this select 0)];);
+        class controlsBackground {
+            class dorb_disp_header : dorb_gui_backgroundBase {
+                text = "";
+                idc = 770201;
+                sizeEx = GUI_H(0.03);
+                style = ST_CENTER;
+                x = (safezoneX + safezoneW) - 2.5 * GUI_GRID_W;
+                y = (safezoneY + GUI_GRID_H * 6);
+                w = GUI_GRID_W * 2;
+                h = GUI_GRID_H * 2;
+                colorText[] = UI_CL_BODY_TEXT;
+                colorBackground[] = UI_CL_BODY;
+            };
+        };
+    };
+	
+	
+	
+	
     class GVAR(disp_msg) {
         duration = 20;
         idd = 700100;
