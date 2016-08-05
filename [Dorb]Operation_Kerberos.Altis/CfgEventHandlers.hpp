@@ -19,6 +19,16 @@ class Extended_PreInit_EventHandlers {
     INCLUDE_PREINIT(spawn);
     INCLUDE_PREINIT(tfar_addon);
 };
+class Extended_PreStart_EventHandlers {
+    INCLUDE_PRESTART(main);
+    INCLUDE_PRESTART(common);
+    INCLUDE_PRESTART(headless);
+    INCLUDE_PRESTART(interface);
+    INCLUDE_PRESTART(player);
+    INCLUDE_PRESTART(logistics);
+    INCLUDE_PRESTART(spawn);
+    INCLUDE_PRESTART(tfar_addon);
+};
 
 class Extended_PostInit_EventHandlers {
     INCLUDE_POSTINIT(main);

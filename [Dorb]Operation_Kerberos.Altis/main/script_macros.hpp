@@ -52,6 +52,18 @@ Author:
         class TRIPLES(PREFIX,var1,client) {\
             Clientinit = QUOTE(call compile ('_fnc_scriptName = ''TRIPLES(PREFIX,var1,clientpreinit)''; scriptName _fnc_scriptName;' + preProcessFileLineNumbers 'var1\XEH_ClientPostInit.sqf')); \
         };
+    #define INCLUDE_PRESTART(var1) \
+        class DOUBLES(PREFIX,var1) {\
+            init = QUOTE(call compile ('_fnc_scriptName = ''TRIPLES(PREFIX,var1,prestart)''; scriptName _fnc_scriptName;' + preProcessFileLineNumbers 'var1\XEH_PreStart.sqf')); \
+        };
+    #define INCLUDE_SERVERPRESTART(var1) \
+        class TRIPLES(PREFIX,var1,server) {\
+            Serverinit = QUOTE(call compile ('_fnc_scriptName = ''TRIPLES(PREFIX,var1,serverprestart)''; scriptName _fnc_scriptName;' + preProcessFileLineNumbers 'var1\XEH_ServerPreStart.sqf')); \
+        };
+    #define INCLUDE_CLIENTPRESTART(var1) \
+        class TRIPLES(PREFIX,var1,client) {\
+            Clientinit = QUOTE(call compile ('_fnc_scriptName = ''TRIPLES(PREFIX,var1,clientprestart)''; scriptName _fnc_scriptName;' + preProcessFileLineNumbers 'var1\XEH_ClientPreStart.sqf')); \
+        };
     #define GVAR(var1) DOUBLES(ADDON,var1)
     #define GVARMAIN(var1) DOUBLES(PREFIX,var1)
     #define QGVAR(var1) QUOTE(GVAR(var1))
