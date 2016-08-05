@@ -219,7 +219,9 @@ switch (_mode) do {
         if(isNil "DORB_GPTR_AKTIV")exitWith{};
         DORB_GPTR_AKTIV=false;
         ["terminate"] call SELF;
-        uisleep 10;
-        ["init"] spawn SELF;
+        []spawn {
+            uisleep 10;
+            ["init"] spawn SELF;
+        };
     };
 };
